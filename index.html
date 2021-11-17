@@ -11,30 +11,63 @@
   <link rel="stylesheet" href="index.css">
 </head>
 <body>
-  <header class="mdc-top-app-bar header">
-    <div class="mdc-top-app-bar__row">
-      <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
-        <button class="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button" aria-label="Open navigation menu">menu</button>
-        <span class="mdc-top-app-bar__title">Simple Web App</span>
-      </section>
-      <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end" role="toolbar">
-        <button class="material-icons mdc-top-app-bar__action-item mdc-icon-button" aria-label="Favorite">house</button>
-        <p>Home</p>
-        <span style="flex: 0.05"></span>
-        <button class="material-icons mdc-top-app-bar__action-item mdc-icon-button" aria-label="Search">search</button>
-        <p>Search</p>
-        <span style="flex: 0.2"></span>
-        <!-- <button class="material-icons mdc-top-app-bar__action-item mdc-icon-button" aria-label="Options">more_vert</button> -->
-      </section>
-    </div>
-  </header>
-  <main class="mdc-top-app-bar--fixed-adjust">
-    <div class="container">
-      <div class="leftContainer"></div>
-      <div class="rightContainer">
-        <img src="app_development.svg" alt="app dev" class="img-right">
+  <aside class="mdc-drawer mdc-drawer--dismissible">
+    <div class="mdc-drawer__content">
+      <div class="mdc-list">
+        <a class="mdc-list-item mdc-list-item--activated" href="#" aria-current="page">
+          <span class="mdc-list-item__ripple"></span>
+          <i class="material-icons mdc-list-item__graphic" aria-hidden="true">home</i>
+          <span class="mdc-list-item__text">Home</span>
+        </a>
+        <a class="mdc-list-item" href="#">
+          <span class="mdc-list-item__ripple"></span>
+          <i class="material-icons mdc-list-item__graphic" aria-hidden="true">category</i>
+          <span class="mdc-list-item__text">Categories</span>
+        </a>
+        <a class="mdc-list-item" href="#">
+          <span class="mdc-list-item__ripple"></span>
+          <i class="material-icons mdc-list-item__graphic" aria-hidden="true">settings</i>
+          <span class="mdc-list-item__text">Settings</span>
+        </a>
       </div>
     </div>
-  </main>
+  </aside>
+  <div class="mdc-drawer-app-content">
+    <header class="mdc-top-app-bar mdc-top-app-bar--fixed app-bar" id="app-bar">
+      <div class="mdc-top-app-bar__row">
+        <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+          <button class="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button" aria-label="Open navigation menu" id="leading-icon">menu</button>
+          <span class="mdc-top-app-bar__title">Simple Web App</span>
+        </section>
+        <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end" role="toolbar">
+          <!-- <button class="material-icons mdc-top-app-bar__action-item mdc-icon-button" aria-label="Favorite">house</button>
+          <p>Home</p>
+          <span style="flex: 0.05"></span> -->
+          <button class="material-icons mdc-top-app-bar__action-item mdc-icon-button" aria-label="Search">search</button>
+          <p>Search</p>
+          <span style="flex: 0.2"></span>
+          <!-- <button class="material-icons mdc-top-app-bar__action-item mdc-icon-button" aria-label="Options">more_vert</button> -->
+        </section>
+      </div>
+    </header>
+    <main class="main-content" id="main-content">
+      <div class="mdc-top-app-bar--fixed-adjust">
+        <div class="container">
+          <div class="leftContainer"></div>
+          <div class="rightContainer">
+            <img src="app_development.svg" alt="app dev" class="img-right">
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
 </body>
+<script>
+  const drawer = mdc.drawer.MDCDrawer.attachTo(document.querySelector('.mdc-drawer'));
+  const topAppBar = mdc.topAppBar.MDCTopAppBar.attachTo(document.getElementById('app-bar'));
+  topAppBar.setScrollTarget(document.getElementById('main-content'));
+  topAppBar.listen('MDCTopAppBar:nav', () => {
+    drawer.open = !drawer.open;
+  });
+</script>
 </html>
